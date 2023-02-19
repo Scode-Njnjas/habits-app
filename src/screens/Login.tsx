@@ -1,3 +1,5 @@
+import {AppRoutes} from '@/navigation/types';
+import {images, fonts, devices, colors} from '@/vars';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {Fragment, useState} from 'react';
 import {
@@ -10,11 +12,6 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
-import {AppRoutes} from '../navigation/types';
-import {colors} from '../vars/colors';
-import {devices} from '../vars/devices';
-import {fonts} from '../vars/fonts';
-import {images} from '../vars/images';
 
 const Login = () => {
   const navigation = useNavigation<NavigationProp<AppRoutes>>();
@@ -34,7 +31,7 @@ const Login = () => {
       onBlur={() => setIsFocuPassword(false)}
       secureTextEntry
       onChangeText={e => setPassword(e)}
-      value={password}
+      // value={password}
       placeholderTextColor={colors.gray}>
       {!isFocuPassword && !password && (
         <Fragment>
@@ -49,7 +46,7 @@ const Login = () => {
       onFocus={e => setIsFocuPassword(true)}
       onBlur={() => setIsFocuPassword(false)}
       onChangeText={e => setPassword(e)}
-      value={password}
+      // value={password}
       placeholderTextColor={colors.gray}>
       {!isFocuPassword && !password && (
         <Fragment>
@@ -61,10 +58,7 @@ const Login = () => {
   ) : (
     <Pressable
       onPress={e => setIsFocuPassword(true)}
-      style={[
-        styles.textInputStyle,
-        {justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center'},
-      ]}>
+      style={[styles.textInputStyle, styles.inputTemp]}>
       {password.split('').map((e, i) => (
         <View key={i} style={styles.dot} />
       ))}
@@ -82,7 +76,7 @@ const Login = () => {
             style={styles.textInputStyle}
             onFocus={() => setIsFocusUserName(true)}
             onBlur={() => setIsFocusUserName(false)}
-            value={userName}
+            // value={userName}
             onChangeText={e => {
               setUserName(e);
             }}
@@ -232,6 +226,11 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 100,
     marginEnd: 3,
+  },
+  inputTemp: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

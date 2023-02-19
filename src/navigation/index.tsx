@@ -1,8 +1,8 @@
-import Login from '../screens/Login';
+// import Login from '../screens/Login';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {AppRoutes} from './types';
-import {SignUp} from '../screens';
+import {Login, SignUp} from '@/screens';
 
 const Stack = createStackNavigator<AppRoutes>();
 
