@@ -1,5 +1,5 @@
-import {Dimensions, Platform} from 'react-native';
-const screen = Dimensions.get('screen');
+import {Dimensions, Platform} from 'react-native'
+const screen = Dimensions.get('screen')
 
 export const devices = {
   isAndroid: Platform.OS === 'android',
@@ -10,4 +10,4 @@ export const devices = {
     ratio: screen.height / screen.width,
     isBigScreen: screen.width > 1000,
   },
-};
+}

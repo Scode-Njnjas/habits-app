@@ -16,4 +16,4 @@ export const fonts = {
     large_26: 26,
     large_28: 28,
   },
-};
+}

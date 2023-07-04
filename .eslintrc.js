@@ -13,4 +13,13 @@ module.exports = {
       },
     },
   ],
-};
+  rules: {
+    semi: ['error', 'never'],
+    'array-bracket-spacing': ['error', 'never'],
+    'react/require-default-props': ['error'],
+    'react/default-props-match-prop-types': ['error'],
+    'react/sort-prop-types': ['error'],
+    'react-hooks/exhaustive-deps': 'off',
+    'no-extra-semi': ['off'],
+  },
+}

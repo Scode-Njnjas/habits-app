@@ -1,9 +1,9 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
-import {Home, Login} from '../screens';
-import {BottomTabRoutes} from './types';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import React from 'react'
+import {BottomTabRoutes} from './types'
+import Login from '@/screens/Auth/Login'
 
-const Tab = createBottomTabNavigator<BottomTabRoutes>();
+const Tab = createBottomTabNavigator<BottomTabRoutes>()
 
 const BottomTabs = () => {
   return (
@@ -12,10 +12,9 @@ const BottomTabs = () => {
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Login" component={Login} />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
-export default BottomTabs;
+export default BottomTabs

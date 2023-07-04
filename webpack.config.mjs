@@ -1,8 +1,8 @@
-import path from 'path';
-import TerserPlugin from 'terser-webpack-plugin';
-import * as Repack from '@callstack/repack';
+import path from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
+import * as Repack from '@callstack/repack'
 
-const STANDALONE = Boolean(process.env.STANDALONE);
+const STANDALONE = Boolean(process.env.STANDALONE)
 
 /**
  * More documentation, installation, usage, motivation and differences with Metro is available at:
@@ -31,11 +31,11 @@ export default env => {
     sourceMapFilename = undefined,
     assetsPath = undefined,
     reactNativePath = new URL('./node_modules/react-native', import.meta.url).pathname,
-  } = env;
-  const dirname = Repack.getDirname(import.meta.url);
+  } = env
+  const dirname = Repack.getDirname(import.meta.url)
 
   if (!platform) {
-    throw new Error('Missing platform');
+    throw new Error('Missing platform')
   }
 
   /**
@@ -48,7 +48,7 @@ export default env => {
    * otherwise an error might occur.
    */
   if (devServer) {
-    devServer.hmr = false;
+    devServer.hmr = false
   }
 
   /**
@@ -59,7 +59,7 @@ export default env => {
    * to `development` or `production`. Otherwise your production code might be compiled with
    * in development mode by Babel.
    */
-  process.env.BABEL_ENV = mode;
+  process.env.BABEL_ENV = mode
 
   return {
     mode,
@@ -272,5 +272,5 @@ export default env => {
         remotes: {},
       }),
     ],
-  };
-};
+  }
+}

@@ -1,7 +1,7 @@
-import {AppRoutes} from '@/navigation/types';
-import {images, fonts, devices, colors} from '@/vars';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {Fragment, useState} from 'react';
+import {AppRoutes} from '@/navigation/types'
+import {images, fonts, devices, colors} from '@/vars'
+import {NavigationProp, useNavigation} from '@react-navigation/native'
+import React, {Fragment, useState} from 'react'
 import {
   StyleSheet,
   View,
@@ -11,23 +11,21 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Keyboard,
-} from 'react-native';
+} from 'react-native'
 
 const Login = () => {
-  const navigation = useNavigation<NavigationProp<AppRoutes>>();
-  const [checked, setChecked] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [isFocusUserName, setIsFocusUserName] = useState<boolean>(false);
-  const [isFocuPassword, setIsFocuPassword] = useState<boolean>(false);
-  const beh = devices.isIOS ? 'padding' : undefined;
-
-  // const []
+  const navigation = useNavigation<NavigationProp<AppRoutes>>()
+  const [checked, setChecked] = useState<boolean>(false)
+  const [userName, setUserName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [isFocusUserName, setIsFocusUserName] = useState<boolean>(false)
+  const [isFocuPassword, setIsFocuPassword] = useState<boolean>(false)
+  const beh = devices.isIOS ? 'padding' : undefined
 
   const inputPassword = isFocuPassword ? (
     <TextInput
       style={styles.textInputStyle}
-      onFocus={e => setIsFocuPassword(true)}
+      onFocus={() => setIsFocuPassword(true)}
       onBlur={() => setIsFocuPassword(false)}
       secureTextEntry
       onChangeText={e => setPassword(e)}
@@ -43,7 +41,7 @@ const Login = () => {
   ) : !password ? (
     <TextInput
       style={styles.textInputStyle}
-      onFocus={e => setIsFocuPassword(true)}
+      onFocus={() => setIsFocuPassword(true)}
       onBlur={() => setIsFocuPassword(false)}
       onChangeText={e => setPassword(e)}
       // value={password}
@@ -57,13 +55,13 @@ const Login = () => {
     </TextInput>
   ) : (
     <Pressable
-      onPress={e => setIsFocuPassword(true)}
+      onPress={() => setIsFocuPassword(true)}
       style={[styles.textInputStyle, styles.inputTemp]}>
       {password.split('').map((e, i) => (
         <View key={i} style={styles.dot} />
       ))}
     </Pressable>
-  );
+  )
 
   return (
     <Pressable onPress={() => Keyboard.dismiss()} style={styles.container}>
@@ -78,7 +76,7 @@ const Login = () => {
             onBlur={() => setIsFocusUserName(false)}
             // value={userName}
             onChangeText={e => {
-              setUserName(e);
+              setUserName(e)
             }}
             placeholderTextColor={colors.gray}>
             {!isFocusUserName && !userName && (
@@ -112,8 +110,8 @@ const Login = () => {
         </View>
       </KeyboardAvoidingView>
     </Pressable>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {flex: 1, resizeMode: 'cover'},
@@ -232,6 +230,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-});
+})
 
-export default Login;
+export default Login
