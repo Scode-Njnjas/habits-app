@@ -1,97 +1,127 @@
-import {AppRoutes} from '@/navigation/types'
+import {HeaderAuth, StepIndicator} from '@/components'
 import {colors, devices, fonts, images} from '@/vars'
-import {NavigationProp, useNavigation} from '@react-navigation/native'
 import React, {Fragment, useState} from 'react'
+import {TextInput} from 'react-native'
 import {Image, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native'
-import StepIndicator from 'react-native-step-indicator-v2'
-import {StepIndicatorStyles} from 'react-native-step-indicator-v2/lib/typescript/src/types'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 const SignUp = () => {
-  const navigation = useNavigation<NavigationProp<AppRoutes>>()
   const [check, setCheck] = useState<number>(1)
-  const customStyles: StepIndicatorStyles = {
-    stepIndicatorSize: 0,
-    currentStepIndicatorSize: 0,
-    separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 0,
-    stepStrokeCurrentColor: colors.green,
-    stepStrokeWidth: 0,
-    stepStrokeFinishedColor: colors.green,
-    stepStrokeUnFinishedColor: '#aaaaaa',
-    separatorFinishedColor: colors.green,
-    separatorUnFinishedColor: '#aaaaaa',
-    stepIndicatorFinishedColor: colors.green,
-    stepIndicatorUnFinishedColor: '#ffffff',
-    stepIndicatorCurrentColor: '#ffffff',
-    // stepIndicatorLabelFontSize: 13,
-    currentStepIndicatorLabelFontSize: 13,
-    stepIndicatorLabelCurrentColor: colors.green,
-    stepIndicatorLabelFinishedColor: '#ffffff',
-    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-    labelColor: '#999999',
-    labelSize: 0,
-    currentStepLabelColor: '#fe7013',
-    borderRadiusSize: 0,
-    widthIndicatorProgressBar: 2,
-  }
-
-  const renderStepIndicator = () => {
-    return <Fragment />
-  }
+  const [abc, setAbc] = useState({
+    married: false,
+    kids: false,
+  })
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.iconArrow} onPress={() => navigation.goBack()}>
-        <Image source={images.arrowLeft} style={styles.icon} />
-      </Pressable>
-      <View style={styles.indicator}>
-        <StepIndicator
-          customStyles={customStyles}
-          currentPosition={1}
-          renderStepIndicator={renderStepIndicator}
-          stepCount={12}
-          fullScreen
-        />
-      </View>
-      <View style={styles.content}>
-        <Text style={styles.txtTitle}>We need to know who you are!</Text>
-        <View style={styles.contentDetail}>
-          <Pressable style={[styles.frameGroup]} onPress={() => setCheck(1)}>
-            <View style={styles.groupParent}>
-              <View style={styles.imgContainer}>
-                <Image style={styles.icon} resizeMode="cover" source={images.profile} />
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        scrollEnabled={false}
+        contentContainerStyle={styles.container}>
+        <HeaderAuth />
+        <StepIndicator step={1} />
+        <View style={styles.content}>
+          <Text style={styles.txtTitle}>We need to know who you are!</Text>
+          <View style={styles.contentDetail}>
+            <Pressable style={[styles.frameGroup]} onPress={() => setCheck(1)}>
+              <View style={styles.groupParent}>
+                <View style={styles.imgContainer}>
+                  <Image style={styles.icon} resizeMode="cover" source={images.profile} />
+                </View>
+                <Text style={styles.txtOption}>A person waiving</Text>
               </View>
-              <Text style={styles.txtOption}>A person waiving</Text>
-            </View>
-            <Image
-              style={styles.icon}
-              resizeMode="cover"
-              source={check === 1 ? images.checkedCircle : images.checkCircle}
-            />
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={check === 1 ? images.checkedCircle : images.checkCircle}
+              />
+            </Pressable>
+          </View>
+          <View style={styles.contentDetail}>
+            <Pressable
+              style={[styles.frameGroup, check === 2 ? {flexDirection: 'column'} : {}]}
+              onPress={() => setCheck(2)}>
+              <View
+                style={
+                  check === 2
+                    ? [styles.frameGroup, {flexDirection: 'row', paddingTop: 0}]
+                    : {
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
+                      }
+                }>
+                <View style={styles.groupParent}>
+                  <View style={styles.imgContainer}>
+                    <Image style={styles.icon} resizeMode="cover" source={images.people} />
+                  </View>
+                  <Text style={styles.txtOption}>A small family waiving</Text>
+                </View>
+                <Image
+                  style={styles.icon}
+                  resizeMode="cover"
+                  source={check === 2 ? images.checkedCircle : images.checkCircle}
+                />
+              </View>
+              {check === 2 && (
+                <Fragment>
+                  <View style={styles.line} />
+                  <Pressable
+                    style={styles.textContainerExtend}
+                    onPress={() => setAbc({...abc, married: !abc.married})}>
+                    <Text style={[styles.txtOption, {marginStart: 0}]}>
+                      Married or Committed Relationship
+                    </Text>
+                    <Image
+                      style={styles.imgCheckbox}
+                      source={abc.married ? images.checked : images.check}
+                    />
+                  </Pressable>
+                  <Pressable
+                    style={[styles.textContainerExtend, {marginTop: 20}]}
+                    onPress={() => setAbc({...abc, kids: !abc.kids})}>
+                    <Text style={[styles.txtOption, {marginStart: 0}]}>Kids</Text>
+                    <Image
+                      style={styles.imgCheckbox}
+                      source={abc.kids ? images.checked : images.check}
+                    />
+                  </Pressable>
+                  <TextInput
+                    style={styles.textInputStyle}
+                    onFocus={() => {}}
+                    onBlur={() => {}}
+                    onChangeText={e => {}}
+                    placeholderTextColor={colors.gray}>
+                    <Fragment>
+                      <Text style={styles.textInputPlaceholderStyle}>Enter your username</Text>
+                      <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
+                    </Fragment>
+                  </TextInput>
+                  <TextInput
+                    style={styles.textInputStyle}
+                    onFocus={() => {}}
+                    onBlur={() => {}}
+                    onChangeText={e => {}}
+                    placeholderTextColor={colors.gray}>
+                    <Fragment>
+                      <Text style={styles.textInputPlaceholderStyle}>Enter your username</Text>
+                      <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
+                    </Fragment>
+                  </TextInput>
+                </Fragment>
+              )}
+            </Pressable>
+          </View>
+        </View>
+
+        <View style={styles.bottomArea}>
+          <Text style={styles.txtStep2}>Are you a financial professional?</Text>
+          <Pressable style={styles.btnSignIn}>
+            <Text style={styles.txtSignIn}>Continue</Text>
           </Pressable>
         </View>
-        <View style={styles.contentDetail}>
-          <Pressable style={[styles.frameGroup]} onPress={() => setCheck(2)}>
-            <View style={styles.groupParent}>
-              <View style={styles.imgContainer}>
-                <Image style={styles.icon} resizeMode="cover" source={images.people} />
-              </View>
-              <Text style={styles.txtOption}>A small family waiving</Text>
-            </View>
-            <Image
-              style={styles.icon}
-              resizeMode="cover"
-              source={check === 2 ? images.checkedCircle : images.checkCircle}
-            />
-          </Pressable>
-        </View>
-      </View>
-      <View style={styles.bottomArea}>
-        <Text style={styles.txtStep2}>Are you a financial professional?</Text>
-        <Pressable style={styles.btnSignIn}>
-          <Text style={styles.txtSignIn}>Sign in</Text>
-        </Pressable>
-      </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   )
 }
@@ -119,19 +149,6 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    width: '100%',
-  },
-  iconArrow: {
-    flexDirection: 'column',
-    width: devices.screen.width,
-    marginStart: 24,
-    marginBottom: 25,
-    marginTop: devices.isAndroid ? 20 : 0,
-  },
-  indicator: {
-    flexDirection: 'column',
-    width: devices.screen.width,
-    marginBottom: 25,
   },
   content: {
     flex: 1,
@@ -149,10 +166,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  groupIcon: {
-    width: 40,
-    height: 40,
   },
   imgContainer: {
     backgroundColor: colors.black_200,
@@ -181,6 +194,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.white,
     marginStart: 10,
+    textAlign: 'left',
   },
   contentDetail: {
     marginBottom: 15,
@@ -212,5 +226,43 @@ const styles = StyleSheet.create({
     width: (devices.screen.width * 61) / 75,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  imgCheckbox: {
+    width: 17,
+    height: 17,
+  },
+  line: {
+    backgroundColor: colors.black_200,
+    height: 1,
+    width: '100%',
+  },
+  textContainerExtend: {
+    marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  textInputStyle: {
+    height: 49,
+    borderRadius: 15,
+    borderColor: colors.black_200,
+    width: (devices.screen.width * 61) / 75,
+    backgroundColor: colors.transparent,
+    borderWidth: 1,
+    padding: 15,
+    color: colors.gray,
+    fontWeight: '400',
+    fontSize: 14,
+    marginTop: 16,
+  },
+  textInputPlaceholderStyle: {
+    color: colors.gray,
+    fontFamily: fonts.family.InterRegular,
+    fontSize: fonts.size.small_14,
+  },
+  textInputPlaceholderStyleRequire: {
+    color: colors.red,
+    fontFamily: fonts.family.InterRegular,
+    fontSize: fonts.size.small_14,
   },
 })

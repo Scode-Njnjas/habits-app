@@ -1,3 +1,5 @@
-export {default as Button} from './button'
-export {default as Container} from './container'
-export {default as Header} from './header'
+export {default as Button} from './Button/index'
+export {default as Container} from './Container/index'
+export {default as Header} from './Header/index'
+export {default as HeaderAuth} from './Header/HeaderAuth/index'
+export {default as StepIndicator} from './StepIndicator/index'

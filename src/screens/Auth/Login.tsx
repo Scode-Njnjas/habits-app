@@ -74,7 +74,6 @@ const Login = () => {
             style={styles.textInputStyle}
             onFocus={() => setIsFocusUserName(true)}
             onBlur={() => setIsFocusUserName(false)}
-            // value={userName}
             onChangeText={e => {
               setUserName(e)
             }}
