@@ -6,10 +6,28 @@ export const colors = {
   black_300: '#131313',
 
   gray: '#636363',
+  gray_100: '#eeeeee',
 
   red: '#EF4040',
 
   green: '#6DD233',
 
   white: '#FFFFFF',
+}
+
+export const darkColors = {
+  transparent: 'transparent',
+  black: '#FFFFFF',
+  black_100: '#444444',
+  black_200: '#333333',
+  black_300: '#131313',
+
+  gray: '#636363',
+  gray_100: '#eeeeee',
+
+  red: '#EF4040',
+
+  green: '#6DD233',
+
+  white: '#000000',
 }

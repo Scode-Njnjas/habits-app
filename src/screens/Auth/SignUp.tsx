@@ -26,14 +26,14 @@ const SignUp = () => {
             <Pressable style={[styles.frameGroup]} onPress={() => setCheck(1)}>
               <View style={styles.groupParent}>
                 <View style={styles.imgContainer}>
-                  <Image style={styles.icon} resizeMode="cover" source={images.profile} />
+                  <Image style={styles.icon} resizeMode="cover" source={images.ic_profile} />
                 </View>
                 <Text style={styles.txtOption}>A person waiving</Text>
               </View>
               <Image
                 style={styles.icon}
                 resizeMode="cover"
-                source={check === 1 ? images.checkedCircle : images.checkCircle}
+                source={check === 1 ? images.ic_checked_circle : images.ic_check_circle}
               />
             </Pressable>
           </View>
@@ -54,14 +54,14 @@ const SignUp = () => {
                 }>
                 <View style={styles.groupParent}>
                   <View style={styles.imgContainer}>
-                    <Image style={styles.icon} resizeMode="cover" source={images.people} />
+                    <Image style={styles.icon} resizeMode="cover" source={images.ic_people} />
                   </View>
                   <Text style={styles.txtOption}>A small family waiving</Text>
                 </View>
                 <Image
                   style={styles.icon}
                   resizeMode="cover"
-                  source={check === 2 ? images.checkedCircle : images.checkCircle}
+                  source={check === 2 ? images.ic_checked_circle : images.ic_check_circle}
                 />
               </View>
               {check === 2 && (
@@ -75,7 +75,7 @@ const SignUp = () => {
                     </Text>
                     <Image
                       style={styles.imgCheckbox}
-                      source={abc.married ? images.checked : images.check}
+                      source={abc.married ? images.ic_checked : images.ic_check}
                     />
                   </Pressable>
                   <Pressable
@@ -84,7 +84,7 @@ const SignUp = () => {
                     <Text style={[styles.txtOption, {marginStart: 0}]}>Kids</Text>
                     <Image
                       style={styles.imgCheckbox}
-                      source={abc.kids ? images.checked : images.check}
+                      source={abc.kids ? images.ic_checked : images.ic_check}
                     />
                   </Pressable>
                   <TextInput

@@ -5,6 +5,7 @@ import PageName from '@/config/PageName'
 import {NavigationContainer} from '@react-navigation/native'
 import Login from '@/screens/Auth/Login'
 import SignUp from '@/screens/Auth/SignUp'
+import {screenTracking} from './NavigationActions'
 
 const Stack = createNativeStackNavigator()
 
@@ -20,7 +21,7 @@ const PreAuthStack = () => {
 const Main = () => {
   useEffect(() => {}, [])
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef} onStateChange={screenTracking}>
       <Stack.Navigator initialRouteName={PageName.PreAuthStack} screenOptions={screenOptions}>
         <Stack.Screen name={PageName.PreAuthStack} component={PreAuthStack} />
       </Stack.Navigator>

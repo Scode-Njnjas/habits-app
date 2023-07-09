@@ -11,7 +11,7 @@ export default function HeaderAuth() {
 
   return (
     <Pressable style={styles.iconArrow} onPress={() => navigation.goBack()}>
-      <Image source={images.arrowLeft} style={styles.icon} />
+      <Image source={images.ic_arrow_left} style={styles.icon} />
     </Pressable>
   )
 }
