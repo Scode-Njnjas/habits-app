@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import Login from '@/screens/Auth/Login'
 import SignUp from '@/screens/Auth/SignUp'
 import {screenTracking} from './NavigationActions'
+import LiquidSwipe from '@/screens/OnboardingScreen/LiquidSwipe'
 
 const Stack = createNativeStackNavigator()
 
@@ -21,8 +22,9 @@ const PreAuthStack = () => {
 const Main = () => {
   useEffect(() => {}, [])
   return (
-    <NavigationContainer ref={navigationRef} onStateChange={screenTracking}>
-      <Stack.Navigator initialRouteName={PageName.PreAuthStack} screenOptions={screenOptions}>
+    <NavigationContainer ref={ref => (navigationRef.current = ref)} onStateChange={screenTracking}>
+      <Stack.Navigator initialRouteName={PageName.OnboardingScreen} screenOptions={screenOptions}>
+        <Stack.Screen name={PageName.OnboardingScreen} component={LiquidSwipe} />
         <Stack.Screen name={PageName.PreAuthStack} component={PreAuthStack} />
       </Stack.Navigator>
     </NavigationContainer>
