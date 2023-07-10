@@ -1,4 +1,24 @@
-export const fonts = {
+type Fonts = {
+  family: {
+    InterBold: string
+    InterLight: string
+    InterMedium: string
+    InterRegular: string
+  }
+  size: {
+    small_12: number
+    small_14: number
+    small_16: number
+    medium_18: number
+    medium_20: number
+    medium_22: number
+    large_24: number
+    large_26: number
+    large_28: number
+  }
+}
+
+export const fonts: Fonts = {
   family: {
     InterBold: 'Inter-Bold',
     InterLight: 'Inter-Light',

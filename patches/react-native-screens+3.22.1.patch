@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-screens/ios/RNSScreen.mm b/node_modules/react-native-screens/ios/RNSScreen.mm
-index dbd9939..1e838a1 100644
+index d6975f7..68ce64c 100644
 --- a/node_modules/react-native-screens/ios/RNSScreen.mm
 +++ b/node_modules/react-native-screens/ios/RNSScreen.mm
 @@ -228,25 +228,25 @@

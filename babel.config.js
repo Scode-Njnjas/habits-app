@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = api => ({
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     'react-native-reanimated/plugin',
@@ -12,5 +12,6 @@ module.exports = {
         },
       },
     ],
+    ...(api.env() !== 'development' ? ['transform-remove-console'] : []),
   ],
-}
+})

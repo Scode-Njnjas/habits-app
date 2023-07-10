@@ -2,7 +2,6 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   /* Recommended React Native TSConfig base */
-  /* Recommended React Native TSConfig base */
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "allowSyntheticDefaultImports": true,
@@ -19,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "useDefineForClassFields": true
   },
   "exclude": [
     "node_modules",

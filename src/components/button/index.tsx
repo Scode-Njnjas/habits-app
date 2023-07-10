@@ -5,9 +5,9 @@ import styles from './styles'
 type Props = {
   children: ReactNode
   title: string
-  btnStyle?: ViewStyle
-  txtBtnStyle?: TextStyle
-  onPress?: () => void
+  btnStyle: ViewStyle
+  txtBtnStyle: TextStyle
+  onPress: () => void
 }
 
 const Button = (props: Props) => {

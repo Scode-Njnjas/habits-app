@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {AppNavigation} from './navigation'
 import {GestureHandlerRootView} from 'react-native-gesture-handler'
@@ -7,13 +7,25 @@ import {PortalProvider} from '@gorhom/portal'
 import Animated, {FadeIn} from 'react-native-reanimated'
 import {Layout} from './theme'
 import Splash from './screens/Splash'
+import {appStore, rehydrateStore} from './stores'
+import i18n from './translations/i18n'
+import {LanguageSheet} from './components'
 
 const App = () => {
   const [isReady, setIsReady] = useState(false)
 
-  setTimeout(() => {
-    setIsReady(true)
-  }, 200)
+  useEffect(() => {
+    rehydrateStore()
+      .then(() => {
+        // setTimeout(() => {
+        i18n.changeLanguage(appStore.currentLanguage?.code)
+        setIsReady(true)
+        // }, 1000),
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <GestureHandlerRootView style={Layout.fill}>
@@ -26,6 +38,7 @@ const App = () => {
           ) : (
             <Splash />
           )}
+          <LanguageSheet />
         </PortalProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

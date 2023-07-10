@@ -1,19 +1,25 @@
+import {ChevronDownSvg} from '@/assets/svg'
+import {AppInput, AppText, Obx, Row} from '@/components'
 import {AppRoutes} from '@/navigation/types'
+import {appStore} from '@/stores'
 import {images, fonts, devices, colors} from '@/vars'
 import {NavigationProp, useNavigation} from '@react-navigation/native'
 import React, {Fragment, useState} from 'react'
+import {useTranslation} from 'react-i18next'
 import {
   StyleSheet,
   View,
   Text,
   Image,
-  TextInput,
   Pressable,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native'
 
 const Login = () => {
+  const {t} = useTranslation()
+
   const navigation = useNavigation<NavigationProp<AppRoutes>>()
   const [checked, setChecked] = useState<boolean>(false)
   const [userName, setUserName] = useState<string>('')
@@ -23,36 +29,34 @@ const Login = () => {
   const beh = devices.isIOS ? 'padding' : undefined
 
   const inputPassword = isFocuPassword ? (
-    <TextInput
+    <AppInput
       style={styles.textInputStyle}
       onFocus={() => setIsFocuPassword(true)}
       onBlur={() => setIsFocuPassword(false)}
       secureTextEntry
       onChangeText={e => setPassword(e)}
-      // value={password}
       placeholderTextColor={colors.gray}>
       {!isFocuPassword && !password && (
         <Fragment>
-          <Text style={styles.textInputPlaceholderStyle}>Enter your password</Text>
+          <Text style={styles.textInputPlaceholderStyle}>{t('Enter your password')}</Text>
           <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
         </Fragment>
       )}
-    </TextInput>
+    </AppInput>
   ) : !password ? (
-    <TextInput
+    <AppInput
       style={styles.textInputStyle}
       onFocus={() => setIsFocuPassword(true)}
       onBlur={() => setIsFocuPassword(false)}
       onChangeText={e => setPassword(e)}
-      // value={password}
       placeholderTextColor={colors.gray}>
       {!isFocuPassword && !password && (
         <Fragment>
-          <Text style={styles.textInputPlaceholderStyle}>Enter your password</Text>
+          <Text style={styles.textInputPlaceholderStyle}>{t('Enter your password')}</Text>
           <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
         </Fragment>
       )}
-    </TextInput>
+    </AppInput>
   ) : (
     <Pressable
       onPress={() => setIsFocuPassword(true)}
@@ -63,51 +67,93 @@ const Login = () => {
     </Pressable>
   )
 
+  const inputUserName = (
+    <AppInput
+      style={styles.textInputStyle}
+      onFocus={() => setIsFocusUserName(true)}
+      onBlur={() => setIsFocusUserName(false)}
+      onChangeText={e => {
+        setUserName(e)
+      }}
+      placeholderTextColor={colors.gray}>
+      {!isFocusUserName && !userName && (
+        <Fragment>
+          <Text style={styles.textInputPlaceholderStyle}>{t('Enter your username')}</Text>
+          <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
+        </Fragment>
+      )}
+    </AppInput>
+  )
+
+  const checkBox = (
+    <Pressable style={styles.checkbox} onPress={() => setChecked(e => !e)}>
+      <Image style={styles.imgCheckbox} source={checked ? images.ic_checked : images.ic_check} />
+      <Text style={styles.txtRememberMe}>{t('Remember me')}</Text>
+    </Pressable>
+  )
+
+  const btnSignIn = (
+    <Fragment>
+      <Pressable style={styles.btnSignIn}>
+        <Text style={styles.txtSignIn}>{t('Sign in')}</Text>
+      </Pressable>
+      <Text style={styles.txtForgot}>{t('Forgot username or password?')}</Text>
+      <Pressable style={styles.btnNew} onPress={() => navigation.navigate('SignUp')}>
+        <Text style={styles.txtSignIn}>{t("I'm new")}</Text>
+      </Pressable>
+    </Fragment>
+  )
+
+  const conditionBlock = (
+    <View style={styles.footer}>
+      <Pressable style={styles.mgE}>
+        <Text style={styles.txtFooter}>{t('Term of use')}</Text>
+      </Pressable>
+      <View style={styles.line} />
+      <Pressable style={styles.mgE}>
+        <Text style={styles.txtFooter}>{t('Privacy')}</Text>
+      </Pressable>
+    </View>
+  )
+
+  const onPressDismiss = () => {
+    Keyboard.dismiss()
+    appStore.setShowLanguageSheet(!appStore.showLanguageSheet)
+  }
+
+  const selectLanguage = (
+    <TouchableOpacity
+      onPress={() => appStore.setShowLanguageSheet(!appStore.showLanguageSheet)}
+      style={styles.languagePicker}>
+      <Row>
+        <Obx>
+          {() =>
+            appStore.currentLanguage ? (
+              <AppText fontWeight={700} lineHeight={14} color={colors.white}>
+                {appStore.currentLanguage.name}{' '}
+              </AppText>
+            ) : null
+          }
+        </Obx>
+        <ChevronDownSvg size={12} color={colors.white} />
+      </Row>
+    </TouchableOpacity>
+  )
+
   return (
-    <Pressable onPress={() => Keyboard.dismiss()} style={styles.container}>
+    <Pressable onPress={onPressDismiss} style={styles.container}>
+      {selectLanguage}
       <KeyboardAvoidingView behavior={beh} style={styles.avoidView}>
         <View style={styles.img}>
           <Image source={images.logo} style={styles.imgStyle} />
         </View>
         <View style={styles.box}>
-          <TextInput
-            style={styles.textInputStyle}
-            onFocus={() => setIsFocusUserName(true)}
-            onBlur={() => setIsFocusUserName(false)}
-            // value={userName}
-            onChangeText={e => {
-              setUserName(e)
-            }}
-            placeholderTextColor={colors.gray}>
-            {!isFocusUserName && !userName && (
-              <Fragment>
-                <Text style={styles.textInputPlaceholderStyle}>Enter your username</Text>
-                <Text style={styles.textInputPlaceholderStyleRequire}>*</Text>
-              </Fragment>
-            )}
-          </TextInput>
+          {inputUserName}
           {inputPassword}
-          <Pressable style={styles.checkbox} onPress={() => setChecked(e => !e)}>
-            <Image style={styles.imgCheckbox} source={checked ? images.checked : images.check} />
-            <Text style={styles.txtRememberMe}>Remember me</Text>
-          </Pressable>
-          <Pressable style={styles.btnSignIn}>
-            <Text style={styles.txtSignIn}>Sign in</Text>
-          </Pressable>
-          <Text style={styles.txtForgot}>Forgot username or password?</Text>
-          <Pressable style={styles.btnNew} onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.txtSignIn}>I'm new</Text>
-          </Pressable>
+          {checkBox}
+          {btnSignIn}
         </View>
-        <View style={styles.footer}>
-          <Pressable style={styles.mgE}>
-            <Text style={styles.txtFooter}>Term of use</Text>
-          </Pressable>
-          <View style={styles.line} />
-          <Pressable style={styles.mgE}>
-            <Text style={styles.txtFooter}>Privacy</Text>
-          </Pressable>
-        </View>
+        {conditionBlock}
       </KeyboardAvoidingView>
     </Pressable>
   )
@@ -229,6 +275,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  languagePicker: {
+    position: 'absolute',
+    zIndex: 99,
+    right: 26,
+    top: devices.isAndroid ? 10 : 54,
   },
 })
 
